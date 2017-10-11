@@ -1,0 +1,13 @@
+.size-img{
+    width: 261px !important;
+    height: 269px !important;
+}
+
+.portfolio-view{
+  background: rgba(46, 112, 63, 0.9) !important;
+}
+
+.portfolio-view .nav-pills li a:hover{
+    color: #267018 !important;
+    border-color: #267018 !important;
+}

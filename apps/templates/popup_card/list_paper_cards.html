@@ -1,0 +1,161 @@
+{% extends 'base/page-master/main-master.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    All Popup Card
+{% endblock %}
+
+{% block extras_static %}
+    <link rel="stylesheet" href="{% static 'popup_card/css/customer.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+            <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">Portfolio</h1>
+                            <p>Be Creative</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#action-->
+
+
+    <section id="blog" class="padding-top">
+        <div class="container">
+
+            {% if object_list %}
+                <div class="row">
+                    <div class="col-md-9 col-sm-7">
+                        <div class="row">
+                            {% for popup_card in object_list %}
+                                <div class="col-md-6 col-sm-12 blog-padding-right">
+                                    <div class="single-blog two-column">
+                                        <div class="post-thumb">
+                                            <a href="{% url 'popup_card:popup_card_detail' popup_card.url %}">
+                                                {% if popup_card.image %}
+                                                    <img src="/resource/{{ popup_card.image }}" class="img-responsive" alt="{{ category.name }}">
+                                                {% else %}
+                                                    <img src="{% static 'assets/triangle/images/portfolio/1.jpg' %}" class="img-responsive" alt="{{ category.name }}">
+                                                {% endif %}
+                                            </a>
+                                            <div class="post-overlay">
+                                                <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
+                                            </div>
+                                        </div>
+                                        <div class="post-content overflow">
+                                            <h2 class="post-title bold"><a
+                                                    href="{% url 'popup_card:popup_card_detail' popup_card.url %}">{{ popup_card.title }}</a>
+                                            </h2>
+                                            <h3 class="post-author"><a href="#">{{ popup_card.name }}</a></h3>
+                                            <p>{{ popup_card.description }}</p>
+                                            <a href="{% url 'popup_card:popup_card_detail' popup_card.url %}"
+                                               class="read-more">View More</a>
+                                            <div class="post-bottom overflow">
+                                                <ul class="nav nav-justified post-nav">
+                                                    <li><a href="#"><i class="fa fa-tag"></i>{{ popup_card.type.name }}
+                                                    </a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-heart"></i>32 Love</a></li>
+                                                    <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if paginator %}
+                            <div class="row">
+                                <div class="portfolio-pagination">
+                                    <ul class="pagination">
+                                        <li>
+                                            {% if page_obj.has_previous %}
+                                                <a href="?page={{ page_obj.previous_page_number }}">left</a>
+                                            {% endif %}
+                                        </li>
+                                        {% for i in  paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="active"><a href="#">{{ i }}</a></li>
+                                            {% else %}
+                                                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        <li>
+                                            {% if page_obj.has_next %}
+                                                <a href="?page={{ page_obj.next_page_number }}">right</a>
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3 col-sm-5">
+                        <div class="sidebar blog-sidebar">
+                            <div class="sidebar-item categories">
+                                <h3>Categories</h3>
+                                <ul class="nav navbar-stacked">
+                                    {% for category in categories %}
+                                    <li id="{{ category.url }}"><a href="{% url 'popup_card:card_list_by_category' category.url %}">{{ category.name }}<span class="pull-right">(1)</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="sidebar-item tag-cloud">
+                                <h3>Tag Cloud</h3>
+                                <ul class="nav nav-pills">
+                                    <li><a href="#">Corporate</a></li>
+                                    <li><a href="#">Joomla</a></li>
+                                    <li><a href="#">Abstract</a></li>
+                                    <li><a href="#">Creative</a></li>
+                                    <li><a href="#">Business</a></li>
+                                    <li><a href="#">Product</a></li>
+                                </ul>
+                            </div>
+                            <div class="sidebar-item popular">
+                                <h3>Latest Photos</h3>
+                                <ul class="gallery">
+                                    <li><a href="#"><img src="{% static 'assets/triangle/images/portfolio/popular1.jpg' %}" alt=""></a></li>
+                                    <li><a href="#"><img src="{% static 'assets/triangle/images/portfolio/popular2.jpg' %}" alt=""></a></li>
+                                    <li><a href="#"><img src="{% static 'assets/triangle/images/portfolio/popular3.jpg' %}" alt=""></a></li>
+                                    <li><a href="#"><img src="{% static 'assets/triangle/images/portfolio/popular4.jpg' %}" alt=""></a></li>
+                                    <li><a href="#"><img src="{% static 'assets/triangle/images/portfolio/popular5.jpg' %}" alt=""></a></li>
+                                    <li><a href="#"><img src="{% static 'assets/triangle/images/portfolio/popular1.jpg' %}" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <h2>We do not have products :(</h2>
+                    <p>Soon we will be offering what you are looking for</p>
+                    <a href="#" class="btn btn-error">RETURN TO THE HOMEPAGE</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <!--/#blog-->
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'assets/triangle/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/triangle/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/triangle/js/jquery.isotope.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/triangle/js/lightbox.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/triangle/js/wow.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/triangle/js/main.js' %}"></script>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'popup_card/js/trujillodev-custom.js' %}"></script>
+{% endblock %}

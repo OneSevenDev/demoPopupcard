@@ -1,0 +1,222 @@
+{% extends 'base/page-master/main-master.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Details Product
+{% endblock %}
+
+{% block content %}
+
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+            <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">Portfolio</h1>
+                            <p>Be Creative</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#action-->
+
+
+    {% for object in card %}
+        <section id="blog-details" class="padding-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-sm-7">
+                        <div class="post-thumb">
+                            <div class="col-sm-6">
+                                {% if popup_card.image %}
+                                    <img src="/resource/{{ object.image }}" class="img-responsive"
+                                         alt="{{ object.name }}">
+                                {% else %}
+                                    <img src="{% static 'assets/triangle/images/portfolio/1.jpg' %}"
+                                         class="img-responsive"
+                                         alt="">
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="project-name overflow">
+                                    <h2 class="bold">{{ object.title }}</h2>
+                                    <ul class="nav navbar-nav navbar-default">
+                                        <li><a href="#"><i class="fa fa-clock-o"></i>{{ object.create_date }}</a></li>
+                                        <li><a href="#"><i class="fa fa-tag"></i>{{ object.type.name }}</a></li>
+                                    </ul>
+                                </div>
+                                <div class="project-info overflow">
+                                    <h3>{{ object.name }}</h3>
+                                    <p>{{ object.description }}</p>
+                                </div>
+                                <div class="skills overflow">
+                                    <h3>Tags</h3>
+                                    <ul class="nav navbar-nav navbar-default">
+                                        {% for tag in tags %}
+                                            <li><a href="#"><i class="fa fa-check-square"></i>{{ tag.name }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="live-preview">
+                                    <a href="{% url 'popup_card:popup_card_list' %}" class="btn btn-common uppercase">Back
+                                        list</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-content overflow">
+                            <div class="post-bottom overflow">
+                                <ul class="nav navbar-nav post-nav">
+                                    <li><a href="#"><i class="fa fa-tag"></i>Creative</a></li>
+                                    <li><a href="#"><i class="fa fa-heart"></i>32 Love</a></li>
+                                    <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
+                                </ul>
+                            </div>
+                            <div class="blog-share">
+                                <span class='st_facebook_hcount'></span>
+                                <span class='st_twitter_hcount'></span>
+                                <span class='st_linkedin_hcount'></span>
+                                <span class='st_pinterest_hcount'></span>
+                                <span class='st_email_hcount'></span>
+                            </div>
+                            <div class="response-area">
+                                <h2 class="bold">Comments</h2>
+                                <ul class="media-list">
+                                    <li class="media" id="content-comment">
+                                        {% for comment in comments %}
+{#                                            {% if comment.is_reply %}#}
+{#                                                <div class="post-comment">#}
+{#                                                    <a class="pull-left" href="#">#}
+{#                                                        <img class="media-object" src="images/blogdetails/2.png" alt="">#}
+{#                                                    </a>#}
+{#                                                    <div class="media-body">#}
+{#                                                        <span><i class="fa fa-user"></i>Posted by <a href="#">Endure</a></span>#}
+{#                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed#}
+{#                                                            do#}
+{#                                                            eiusmod#}
+{#                                                            tempor incididunt ut labore et dolore magna aliq Ut enim ad#}
+{#                                                            minim#}
+{#                                                            veniam, quis nostrud exercitation ullamco laboris nisi.</p>#}
+{#                                                        <ul class="nav navbar-nav post-nav">#}
+{#                                                            <li><a href="#"><i class="fa fa-clock-o"></i>February#}
+{#                                                                11,2014</a>#}
+{#                                                            </li>#}
+{#                                                            <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>#}
+{#                                                        </ul>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            {% else %}#}
+{#                                                <div class="parrent">#}
+{#                                                    <ul class="media-list">#}
+{#                                                        <li class="post-comment reply">#}
+{#                                                            <a class="pull-left" href="#">#}
+{#                                                                <img class="media-object" src="images/blogdetails/3.png" alt="">#}
+{#                                                            </a>#}
+{#                                                            <div class="media-body">#}
+{#                                                                <span><i class="fa fa-user"></i>Posted by <a href="#">Endure</a></span>#}
+{#                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing#}
+{#                                                                    elit, sed#}
+{#                                                                    do#}
+{#                                                                    eiusmod tempor incididunt ut </p>#}
+{#                                                                <ul class="nav navbar-nav post-nav">#}
+{#                                                                    <li><a href="#"><i class="fa fa-clock-o"></i>February#}
+{#                                                                        11,2014</a></li>#}
+{#                                                                </ul>#}
+{#                                                            </div>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            {% endif %}#}
+                                        {% endfor %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-5">
+                        <div class="sidebar blog-sidebar">
+                            <div class="sidebar-item categories">
+                                <h3>Categories</h3>
+                                <ul class="nav navbar-stacked">
+                                    {% for category in categories %}
+                                        <li id="{{ category.url }}"><a
+                                                href="{% url 'popup_card:card_list_by_category' category.url %}">{{ category.name }}<span
+                                                class="pull-right">(1)</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="sidebar-item tag-cloud">
+                                <h3>Tag Cloud</h3>
+                                <ul class="nav nav-pills">
+                                    <li><a href="#">Corporate</a></li>
+                                    <li><a href="#">Joomla</a></li>
+                                    <li><a href="#">Abstract</a></li>
+                                    <li><a href="#">Creative</a></li>
+                                    <li><a href="#">Business</a></li>
+                                    <li><a href="#">Product</a></li>
+                                </ul>
+                            </div>
+                            <div class="sidebar-item popular">
+                                <h3>Latest Photos</h3>
+                                <ul class="gallery">
+                                    <li><a href="#"><img
+                                            src="{% static 'assets/triangle/images/portfolio/popular1.jpg' %}"
+                                            alt=""></a></li>
+                                    <li><a href="#"><img
+                                            src="{% static 'assets/triangle/images/portfolio/popular2.jpg' %}"
+                                            alt=""></a></li>
+                                    <li><a href="#"><img
+                                            src="{% static 'assets/triangle/images/portfolio/popular3.jpg' %}"
+                                            alt=""></a></li>
+                                    <li><a href="#"><img
+                                            src="{% static 'assets/triangle/images/portfolio/popular4.jpg' %}"
+                                            alt=""></a></li>
+                                    <li><a href="#"><img
+                                            src="{% static 'assets/triangle/images/portfolio/popular5.jpg' %}"
+                                            alt=""></a></li>
+                                    <li><a href="#"><img
+                                            src="{% static 'assets/triangle/images/portfolio/popular1.jpg' %}"
+                                            alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+
+    <!--/#portfolio-information-->
+
+    <!-- Start Handlebars -->
+    {% verbatim %}
+    <script type="text/x-handlebars-template" id="entry-commend">
+        {{# each request}}
+            <div class="post-comment">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="images/blogdetails/2.png" alt="">
+                </a>
+                <div class="media-body">
+                    <span><i class="fa fa-user"></i>Posted by <a href="#">{{ create_user }}</a></span>
+                    <p>{{ content }}</p>
+                    <ul class="nav navbar-nav post-nav">
+                        <li><a href="#"><i class="fa fa-clock-o"></i>{{ create_date }}</a></li>
+                        {{#if is_reply}}
+                        <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        {{/each}}
+    </script>
+    {% endverbatim %}
+    <!-- End Handlebars -->
+
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'popup_card/js/detail_paper_js.js' %}"></script>
+{% endblock %}
